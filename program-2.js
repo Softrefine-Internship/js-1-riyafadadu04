@@ -2,3 +2,7 @@
 
 // Sample Input: [1, 2, [3, 4], [5, [6, 7]]];
 // Expected Output: [1, 2, 3, 4, 5, 6, 7];
+
+const inputArray = [1, 2, [3, 4], [5, [6, 7]]];
+const flatArray = inputArray.flat(Infinity);
+console.log(flatArray);

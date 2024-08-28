@@ -11,3 +11,24 @@ Given an integer array flowerbed containing 0's and 1's, where 0 means empty and
 // Example 2:
 // Input: flowerbed = [1,0,0,0,1], n = 2
 // Output: false
+
+
+function canPlaceFlowers(flowerbed, n) {
+    let availableSpots = 0;
+  
+    for (let i = 0; i < flowerbed.length; i++) {
+        if (flowerbed[i] === 0) {
+            const prev = i === 0 ? 0 : flowerbed[i - 1];
+            const next = i === flowerbed.length - 1 ? 0 : flowerbed[i + 1];
+            if (prev === 0 && next === 0) {
+                availableSpots++;
+                flowerbed[i] = 1; 
+            }
+        }
+    }
+    // console.log(availableSpots);
+    return availableSpots >= n;
+  }
+  
+  const flowerbed1 = [1, 0, 0, 0, 1];
+  console.log(canPlaceFlowers(flowerbed1, 1)); 
