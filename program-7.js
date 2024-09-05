@@ -15,33 +15,29 @@
 //  { title: 'Python', author: 'Guido' }
 // ]
 
-
 function removeDuplicateObjects(arr) {
-    const uniqueObjects = [];
-  
-    for (const obj of arr) {
-        let isDuplicate = false;
-        for (const existObj of uniqueObjects) {
-            if (obj.title === existObj.title && obj.author === existObj.author) {
-                isDuplicate = true;
-                break;
-            }
-        }
-        if (!isDuplicate) {
-            uniqueObjects.push(obj);
-        }
+  const uniqueObjects = [];
+  const seenObjects = new Set();
+  for (const obj of arr) {
+    const objString = JSON.stringify(obj);
+    if (!seenObjects.has(objString)) {
+      seenObjects.add(objString);
+      uniqueObjects.push(obj);
     }
-  
-    return uniqueObjects;
   }
-  
-  const inputArray = [
-    { title: "C++", author: "Bjarne" },
-    { title: "Java", author: "James" },
-    { title: "Python", author: "Guido" },
-    { title: "Java", author: "James" },
-  ];
-  
-  const outputArray = removeDuplicateObjects(inputArray);
-  console.log(outputArray);
-  
+  return uniqueObjects;
+}
+
+const inputArray = [
+  { title: "C++", author: "Bjarne" },
+  { title: "Java", author: "James" },
+  { title: "Python", author: "Guido" },
+  { title: "Java", author: "James" },
+  { title: 1, author: [1, 2, 3] },
+  { title: 1, author: [1, 2, 3] },
+  { title: 2, author: { id: 1, id: 2 } },
+  { title: 2, author: { id: 1, id: 2 } },
+];
+
+const outputArray = removeDuplicateObjects(inputArray);
+console.log(outputArray);
